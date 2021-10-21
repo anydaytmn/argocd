@@ -123,3 +123,14 @@ spec:
     - $host # add hostname
     secretName: letsencrypt
 ```
+
+# Important!
+patch argpcd https
+```
+kubectl -n argocd edit deployment argocd-server
+
+command:
+  server:
+  extraArgs:
+  - --insecure
+```
