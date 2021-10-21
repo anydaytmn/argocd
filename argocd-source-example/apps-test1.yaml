@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-test-dev1
+spec:
+  destination:
+    name: ''
+    namespace: ''
+    server: 'k8s-server-host'
+  source:
+    path: app-test-dev1/
+    repoURL: 'ssh://git@github.com/xxxx'
+    targetRevision: develop
+  project: default
+  syncPolicy:
+    syncOptions:
+      - Replace=true
+      - Validate=false
+    automated:
+      prune: false
+      selfHeal: false
