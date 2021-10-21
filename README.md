@@ -134,3 +134,5 @@ command:
   extraArgs:
   - --insecure
 ```
+#### source of argocd examples 
+https://github.com/argoproj/argo-cd/tree/master/docs/operator-manual
