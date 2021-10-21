@@ -136,3 +136,39 @@ command:
 ```
 #### source of argocd examples 
 https://github.com/argoproj/argo-cd/tree/master/docs/operator-manual
+
+
+### Manual sync argocd apps
+```
+argocd app sync --force ${NAME-APP} --auth-token=${ARGOCD_TOKEN} --server ${ARGOCD_ADDR}
+```
+
+### Example argocd app (save file app-test-dev2.yaml)
+
+```
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-test-dev2
+spec:
+  destination:
+    name: ''
+    namespace: ''
+    server: 'k8s-server-host'
+  source:
+    path: app-test-dev2/
+    repoURL: 'ssh://git@github.com/xxxx'
+    targetRevision: develop
+  project: default
+  syncPolicy:
+    syncOptions:
+      - Replace=true
+      - Validate=false
+    automated:
+      prune: false
+      selfHeal: false
+```
+
+```
+kubect -n argocd apply -f app-test-dev2.yaml
+```
